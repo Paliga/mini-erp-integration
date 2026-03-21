@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mini ERP Integration</title>
+    </head>
+
+    <body>
+
+        <h1>Create Order</h1>
+
+        <form id="orderForm">
+
+            <label>Customer Name</label>
+            <input type="text" id="customerName" required />
+
+            <br /><br />
+
+            <label>Product Label</label>
+            <select id="productSku">
+                <option value="">Select product</option>
+            </select>
+
+            <br /><br />
+
+            <button type="submit">Submit Order</button>
+
+        </form>
+
+        <h2>Products</h2>
+        <div id="productList"></div>
+
+        <p id="message"></p>
+        
+    </body>
+</html>
