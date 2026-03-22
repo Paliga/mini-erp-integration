@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "sku": "LAP-001",
+        "name": "Laptop Basic",
+        "stock": 5,
+        "price": 750
+    },
+    {
+        "id": 2,
+        "sku": "MON-001",
+        "name": "Monitor 24",
+        "stock": 8,
+        "price": 180
+    },
+    {
+        "id": 3,
+        "sku": "KEY-001",
+        "name": "Mechanical Keyboard",
+        "stock": 12,
+        "price": 95
+    }
+]
