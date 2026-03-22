@@ -1,6 +1,7 @@
 const productSelect = document.getElementById("productSku");
 const productList = document.getElementById("productList");
 const messageBox = document.getElementById("message");
+const orderForm = document.getElementById("orderForm");
 
 function showMessage(text, type = "info") {
     messageBox.textContent = text;
@@ -44,3 +45,24 @@ async function loadProducts () {
 }
 
 loadProducts();
+
+orderForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // Get customer name
+    const customerName = document.getElementById('customerName').value.trim();
+
+    // Get product label
+    const productSku = productSelect.value;
+
+    // Get quantity
+    const quantity = parseInt(document.getElementById('quantity').value, 10);
+
+    const payload = {
+        customerName: customerName,
+        productSku: productSku,
+        quantity: quantity
+    };
+
+    console.log(payload);
+});
