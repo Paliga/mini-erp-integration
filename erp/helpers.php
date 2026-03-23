@@ -16,3 +16,7 @@ function sendJson($data, $statusCode = 200) {
     echo json_encode($data);
     exit;
 }
+
+function writeJsonFile($path, $data) {
+    file_put_contents($path, json_encode($data, JSON_PRETTY_PRINT));
+}

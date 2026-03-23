@@ -31,7 +31,7 @@ if (
 
 $erpPayload = [
     'customer_name' => $data['customerName'],
-    'product_sku' => $data['productSku'],
+    'item_code' => $data['productSku'],
     'qty' => (int)$data['quantity'],
     'source' => 'shop-ui'
 ];

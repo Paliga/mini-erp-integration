@@ -46,7 +46,7 @@ async function loadProducts () {
 
 loadProducts();
 
-orderForm.addEventListener('submit', (e) => {
+orderForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // Get customer name
@@ -64,5 +64,31 @@ orderForm.addEventListener('submit', (e) => {
         quantity: quantity
     };
 
-    console.log(payload);
+    try {
+        const response = await fetch("middleware/submit-order.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        console.log(result);
+
+        if(!result.success) {
+            showMessage(result.message || "Order failed", "error");
+            return;
+        }
+
+        showMessage("Order submitted successfully!", "success");
+
+        orderForm.reset();
+        loadProducts(); // refresh stock
+
+    } catch (error) {
+        console.error(error);
+        showMessage("Error submitting order", "error");
+    }
 });
