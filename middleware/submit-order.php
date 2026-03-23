@@ -35,3 +35,40 @@ $erpPayload = [
     'qty' => (int)$data['quantity'],
     'source' => 'shop-ui'
 ];
+
+$erpUrl = 'http://localhost:8082/erp/receive-order.php';
+
+$ch = curl_init($erpUrl);
+
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($erpPayload));
+
+$response = curl_exec($ch);
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$curlError = curl_error($ch);
+
+curl_close($ch);
+
+if ($curlError) {
+    logMiddleware("curl error: $curlError");
+
+    sendJson([
+        'success' => false,
+        'message' => 'Failed to connect to ERP system'
+    ], 500);
+}
+
+$erpResponse = json_decode($response, true);
+
+if(!$erpResponse) {
+    logMiddleware("Invalid ERP response: $response");
+
+    sendJson([
+        'success' => false,
+        'message' => 'Invalid ERP response'
+    ], 500);
+}
+
+sendJson($erpResponse, $httpCode);
